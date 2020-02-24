@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+   background-color: #f3f5f9;
+}
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.wrapper .sidebar{
+  width: 200px;
+  height: 100%;
+  background: skyblue;
+  padding: 30px 0px;
+  position: fixed;
+}
+
+.wrapper .sidebar h2{
+  color: #000;
+  text-transform: uppercase;
+  text-align: left;
+  margin: 0px 0px 0px 40px;
+    font-size: 25px;
+}
+
+.wrapper .sidebar ul li{
+  padding: 25px;
+  border-bottom: 1px solid #bdb8d7;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
+    transition: 0.5s ease;
+}    
+
+.wrapper .sidebar ul li a{
+  color: black;
+  display: block;
+    transition: 0.2s ease;
+}
+
+.wrapper .sidebar ul li a .fas{
+    width: 40px;
+    font-size: 25px;
+    transition: 0.5s ease;
+}
+
+.wrapper .sidebar ul li:hover{
+  background-color: skyblue;
+    transition: 0.8s ease;
+}
+
+.wrapper .sidebar ul li:hover a {
+  color: #fff;
+    transition: 0.5s ease;
+}
+
+.wrapper .sidebar ul li:hover a i{
+    color: #fff;
+    transform: scale(1.5);
+    transition: 0.4s ease;
+}
+ 
+.wrapper .sidebar .social_media{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.wrapper .main_content{
+    width: 100%;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.wrapper .main_content .header{
+    padding: 40px;
+    margin-left: 47.4%;
+    margin-right: 50%;
+  color: #717171;
+  border-bottom: 1px solid #e0e4e8;
+}
+#customers {
+  border-collapse: collapse;
+  width: 60%;
+    margin-left: 28%;
+    margin-top: 5%;
+    font-size: 20px;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px 10px 10px 15px;
+}
+#customers tr
+{
+    transition: 0.5s ease;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover
+{
+    transition: 0.8s ease;
+    transform: scale(1.05);
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: skyblue;
+  color: white;
+}
+.btn
+{
+    margin-top: 5%;
+    font-size: 20px;
+    margin-left: 70%;
+}
+.sign
+{
+    padding: 10px 20px 10px 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: none;
+    border: 2px solid skyblue;
+    margin-left: 2%;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.sign:hover
+{
+    background-color: skyblue;
+    color: white;
+    transition: 0.5s ease;
+}

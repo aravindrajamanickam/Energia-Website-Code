@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Energia</title>
+	<link rel="stylesheet" href="../css/analytics-style.css">
+	<script src="https://kit.fontawesome.com/e4ec04848c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-storage.js"></script> 
+
+    
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Energia</h2>
+        <ul>
+            <li><a href="../index.html" id="home"><i class="fas fa-user"></i>Admin</a></li>
+            <li><a href="#" id="a"><i class="fas fa-chart-line"></i>Analytics</a></li>
+            <li><a href="contact.html" id="a"><i class="fas fa-address-book"></i>Contact Us</a></li>
+        </ul> 
+    </div>
+    <div class="main_content">
+    <div class="header">Energia</div>
+    </div>
+    <br>
+    <div class="chart">
+        <canvas id="linechart"></canvas>
+    </div>
+    <div class="chart">
+        <canvas id="chartline"></canvas>
+    </div>
+</div>
+
+      <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto mt-3 ml-5">
+                    <div class="card animated animatedFadeInUp fadeInUp shadow p-3 mb-5 bg-white rounded " id="chart1" >
+                      <script>
+                      FusionCharts.ready(function() {
+                        var stockPriceChart1 = new FusionCharts({
+                            id: "stockRealTimeChart1",
+                            type: 'realtimeline',
+                            renderAt: 'chart1',
+                            width: '900',
+                            height: '500',
+                            //theme:'candy',
+                            dataFormat: 'json',
+                            //animationEnables:true,
+                            dataSource: {
+                              "chart": {
+                                "caption": "Current Consumedv(Ampere)",
+                                "showBorder": "0",
+                                //"borderThickness": "3",
+                                "showcanvasBorderRadius":"40",
+                                //"subCaption": "Harry's SuperMart",
+                                "xAxisName": "Time",
+                                "yAxisName": "Ampere",
+                                "lineColor":"19B5FE",
+                                //"numberPrefix": "$",
+                                "refreshinterval": "5",
+                                //"yaxisminvalue": "40",
+                                //"yaxismaxvalue": "200",
+                                "numdisplaysets": "10",
+                                "outCnvBaseFont": "Arial",
+                                "outCnvBaseFontSize": "11",
+                                "outCnvBaseFontColor": "#000000",
+                                "type":"circle",
+                                "labeldisplay": "rotate",
+                                "showRealTimeValue": "0",
+                                "bgColor": "#FFFFFF",
+                                 // "bgratio": "60,40",
+                                 // "bgAlpha": "70,80",
+                                "bgAngle": "180",
+                                "anchorRadius": "5",
+                                "anchorBorderThickness": "2",
+                                "anchorBorderColor": "#127fcb",
+                                "anchorSides": "2",
+                                "anchorBgColor": "#d3f7ff",
+                                "theme": "fusion"
+                              },
+                              "categories": [{
+                                "category": [{
+                                  "label": "Day Start"
+                                }]
+                              }],
+                              "dataset": [{
+                                "data": [{
+                                  "value": "0"
+                                }]
+                              }]
+                            },
+                            "events": {
+                              "initialized": function(e) {
+                                function addLeadingZero(num) {
+                                  return (num <= 9) ? ("0" + num) : num;
+                                }
+                                    function updateData() {
+                                  // Get reference to the chart using its ID
+                                  var chartRef = FusionCharts("stockRealTimeChart1"),
+                                    // We need to create a querystring format incremental update, containing
+                                    // label in hh:mm:ss format
+                                    // and a value (random).
+                                    currDate = new Date(),
+                                    label = addLeadingZero(currDate.getHours()) + ":" +
+                                    addLeadingZero(currDate.getMinutes()) + ":" +
+                                    addLeadingZero(currDate.getSeconds()),
+                                    // Get random number between 35.25 & 35.75 - rounded to 2 decimal places
+                                   //randomValue = Math.floor(Math.random() *
+                                     // 50) / 100 + 35.25
+                                         database=firebase.database();
+                                         firedata=new Array();
+                                         //temp=new Array();
+                                         i=0;  
+                                            var leadsRef =database.ref("eden/temperature/");
+                                            leadsRef.limitToLast(1).on('child_added', function(snapshot) {
+                                            var childData = snapshot.val();
+                                                //console.log(childData);
+                                            firedata.push(childData);
+                                            data=firedata[firedata.length- 1];
+                                            var res = data.slice(0, 5);
+                                            data1=JSON.stringify(res);
+                                            data2=JSON.parse(data1);
+                                            //console.log(data2);
+                                            //console.log(data2.Temperature);
+                                          /* for(i=0;i<firedata.length;i++){
+                                              console.log(firedata[i]); 
+                                                 temp1=JSON.parse(firedata[i]);
+                                                 console.log(temp1.temp)
+                                                 strData = "&label=" + label +
+                                                "&value=" +(temp1.temp); 
+                                           }*/
+                                            
+                                     });
+                                     strData1 = "&label=" + label +
+                                              "&value=" +data2; 
+                                console.log(strData1);
+                                  chartRef.feedData(strData1);
+                                }
+                                var myVar = setInterval(function() {
+                                  updateData();
+                                }, 1000);
+                              }
+                            }
+                          })
+                          .render();
+                      }); 
+                      </script>
+                    </div>
+                </div>   
+            </div>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAH784qAeAYbP3bVd1FHqGuhSVKrI1zlKU",
+    authDomain: "eden-database.firebaseapp.com",
+    databaseURL: "https://eden-database.firebaseio.com",
+    projectId: "eden-database",
+    storageBucket: "eden-database.appspot.com",
+    messagingSenderId: "783228062969",
+    appId: "1:783228062969:web:b451d12b0d5bfbc4a86628",
+    measurementId: "G-YX8JZJ7N7Q"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+    
+<script src="../js/analytics.js"></script>
+    
+
+</body>
+</html>
